@@ -1,0 +1,27 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-DUSE_C10D_GLOO",
+      "-DUSE_C10D_NCCL",
+      "-DUSE_DISTRIBUTED",
+      "-DUSE_RPC",
+      "-DUSE_TENSORPIPE",
+      "-isystem",
+      "/home/kazeshini/Ctorch/libtorch/include",
+      "-isystem",
+      "/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include",
+      "-isystem",
+      "/usr/local/cuda-12.3/include",
+      "-D_GLIBCXX_USE_CXX11_ABI=1",
+      "-D_GLIBCXX_USE_CXX11_ABI=1",
+      "-c",
+      "-o",
+      "CMakeFiles/torch_test.dir/main.cpp.o",
+      "/home/kazeshini/ctorch/Hyesing_benchmark/main.cpp"
+    ],
+    "directory": "/home/kazeshini/ctorch/Hyesing_benchmark/build",
+    "file": "/home/kazeshini/ctorch/Hyesing_benchmark/main.cpp",
+    "output": "/home/kazeshini/ctorch/Hyesing_benchmark/build/CMakeFiles/torch_test.dir/main.cpp.o"
+  }
+]
