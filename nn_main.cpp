@@ -133,7 +133,19 @@ torch::Tensor PinNetImpl::forward
   return I;
 }
 
-
+void PinNetImpl::reset_layers() {
+  //- reset the parameters for the input and output layers
+  input->reset_parameters();
+  output->reset_parameters();
+  //- loop through all the layers in sequential
+  for (int i = 0; i < hidden_layers->size(); i++) {
+    //- check if the layer being iterated is a linear layer or not
+    if (auto linear_layer =
+            dynamic_cast<torch::nn::LinearImpl *>(hidden_layers[i].get())) {
+      hidden_layers[i]->as<torch::nn::Linear>()->reset_parameters();
+    }
+  }
+}
 
 
 

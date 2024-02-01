@@ -316,6 +316,7 @@ int main(int argc,char * argv[])
     writeTensorToFile(grid,gridName);
     writeTensorToFile(C1,fieldsName); 
     mesh.updateMesh();
+    mesh.net_->reset_layers();
   }
   return 0;
 } 
