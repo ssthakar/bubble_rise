@@ -132,6 +132,12 @@ torch::Tensor PinNetImpl::forward
   I = output(I);
   return I;
 }
+
+
+
+
+
+
 //------------------end PINN definitions-------------------------------------//
 
 
@@ -342,10 +348,16 @@ torch::Tensor CahnHillard::L_MomY2d
   const mesh2D &mesh
 )
 {
+	// density of liquid phase
   float &rhoL = mesh.thermo_.rhoL;
+	// dynamic  viscosity of liquid phase
   float &muL = mesh.thermo_.muL;
+	// density of vapor phase
   float rhoG = mesh.thermo_.rhoG;
-  float muG = mesh.thermo_.muG;
+  // dynamic viscosity of vapor pahse
+	float muG = mesh.thermo_.muG;
+
+	//- field variables
   const torch::Tensor &u = mesh.fieldsPDE_.index({Slice(),0});
   const torch::Tensor &v = mesh.fieldsPDE_.index({Slice(),1});
   const torch::Tensor &p = mesh.fieldsPDE_.index({Slice(),2});
@@ -357,7 +369,7 @@ torch::Tensor CahnHillard::L_MomY2d
   torch::Tensor dv_dt = d_d1(v,mesh.iPDE_,2);
   torch::Tensor dv_dx = d_d1(v,mesh.iPDE_,0);
   torch::Tensor dv_dy = d_d1(v,mesh.iPDE_,1);
-  torch::Tensor du_dx = d_d1(u,mesh.iPDE_,0);
+  torch::Tensor du_dy = d_d1(u,mesh.iPDE_,1);
   torch::Tensor dC_dx = d_d1(C,mesh.iPDE_,0);
   torch::Tensor dC_dy = d_d1(C,mesh.iPDE_,1);
   torch::Tensor dp_dy = d_d1(p,mesh.iPDE_,1);
@@ -368,8 +380,8 @@ torch::Tensor CahnHillard::L_MomY2d
   torch::Tensor fy = CahnHillard::surfaceTension(mesh,1);
   torch::Tensor gy = torch::full_like(fy,-0.98);
   torch::Tensor loss1 = rhoM*(dv_dt + u*dv_dx + v*dv_dy) + dp_dy;
-  torch::Tensor loss2 = -0.5*(muL - muG)*dC_dx*(du_dx + dv_dy) - (muL -muG)*dC_dy*dv_dy;
-  torch::Tensor loss3 = -muM*(dv_dxx + dv_dyy) - rhoM*fy - rhoM*gy;
+  torch::Tensor loss2 = -0.5*(muL - muG)*dC_dx*(du_dy + dv_dx) - (muL -muG)*dC_dy*dv_dy;
+  torch::Tensor loss3 = -muM*(dv_dxx + dv_dyy) - fy - rhoM*gy;
   torch::Tensor loss = (loss1 + loss2 + loss3)/rhoL;
   return torch::mse_loss(loss, torch::zeros_like(loss));
 }

@@ -108,6 +108,8 @@ class  PinNetImpl:
         int test_;
         //- number of iterations in each epoch
         int NITER_;
+				//- reset layers of neural network
+				void reset_layers();
 
 };
 //- create Torch module
