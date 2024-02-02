@@ -870,33 +870,39 @@ thermoPhysical::thermoPhysical(Dictionary &dict)
   C = 1.06066017178;
 }
 
+
 void loadState(PinNet& net1, PinNet &net2)
 {
-  torch::autograd::GradMode::set_enabled(false);
-  auto new_params = net2->named_parameters();
-  auto params = net1->named_parameters(true);
-  auto buffer = net1->named_buffers(true);
-  for(auto &val : new_params)
-  {
-    auto name = val.key();
-    auto *t = params.find(name);
-    if(t!=nullptr)
-    {
-      t->copy_(val.value());
-    }
-    else
-    {
-      t= buffer.find(name);
-      if (t !=nullptr)
-      {
-        t->copy_(val.value());
-      }
-    }
-  }
-  torch::autograd::GradMode::set_enabled(true);
+
+  torch::NoGradGuard no_grad;
+  torch::serialize::OutputArchive out;
+  net1->save(out);
+  out.save_to("serialized.pt");
+  torch::serialize::InputArchive in;
+  in.load_from("serialized.pt");
+  net2->load(in);
+  // auto net2_params = net2->named_parameters();
+  // auto net1_params = net1->named_parameters(true);
+  // auto net1_buffer = net1->named_buffers(true);
+  // for(auto &val : net2_params)
+  // {
+  //   auto name = val.key();
+  //   auto *t = net1_params.find(name);
+  //   if(t!=nullptr)
+  //   {
+  //     t->copy_(val.value());
+  //   }
+  //   else
+  //   {
+  //     t= net1_buffer.find(name);
+  //     if (t !=nullptr)
+  //     {
+  //       t->copy_(val.value());
+  //       
+  //     }
+  //   }
+  // }
 } 
-
-
 
 
 

@@ -305,8 +305,14 @@ int main(int argc,char * argv[])
       },1
     );
     
+    // transfer learned paras from net1 to net2
+    mesh.updateMesh();
+    
+    //- reset net1 to create a fresh neural network
+    mesh.net_->reset_layers();
+    
     //- get predicted output, and from that get phaseField 
-    torch::Tensor C1 = mesh.net_->forward(grid);
+    torch::Tensor C1 = mesh.netPrev_->forward(grid);
     
     //- file Names for the
     std::string gridName = "grid" + std::to_string(mesh.ubT_);
@@ -315,8 +321,6 @@ int main(int argc,char * argv[])
     //- write out input data for python to plot
     writeTensorToFile(grid,gridName);
     writeTensorToFile(C1,fieldsName); 
-    mesh.updateMesh();
-    mesh.net_->reset_layers();
   }
   return 0;
 } 
