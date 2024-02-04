@@ -1,16 +1,21 @@
 // main file, run code here
 #include <ATen/core/TensorBody.h>
+#include <ATen/core/grad_mode.h>
 #include <ATen/ops/empty.h>
 #include <ATen/ops/flatten.h>
 #include <ATen/ops/meshgrid.h>
+#include <ATen/ops/mode.h>
 #include <c10/core/ScalarType.h>
 #include <c10/core/TensorOptions.h>
+#include <exception>
 #include <fstream>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include <torch/csrc/autograd/autograd.h>
 #include <torch/csrc/jit/api/module.h>
 #include <torch/cuda.h>
+#include <torch/serialize/input-archive.h>
 #include <torch/torch.h>
 #include "nn_main.h"
 #include "utils.h"
@@ -18,129 +23,73 @@
 //- loads in python like indexing of tensors
 using namespace torch::indexing;
 
-//- util functions to write tensors to file to later plot using matplotlib
-void writeTensorToFile(const torch::Tensor& tensor, const std::string& filename) {
-    // Check if the tensor is 2D
-  if (tensor.ndimension() == 2) 
-  {
-    // Get the sizes of the tensor
-    int64_t numRows = tensor.size(0);
-    int64_t numCols = tensor.size(1);
-
-    // Open the file for writing
-    std::ofstream outputFile(filename);
-
-    // Check if the file is opened successfully
-    if (!outputFile.is_open()) {
-        std::cerr << "Error: Unable to open file for writing." << std::endl;
-        return;
-    }
-
-    // Iterate over the tensor elements and write them to the file
-    for (int64_t i = 0; i < numRows; ++i) {
-        for (int64_t j = 0; j < numCols; ++j) {
-            // Write each element to the file
-            outputFile << tensor.index({i, j}).item<float>() << " ";
-        }
-        outputFile << std::endl; // Move to the next row in the file
-    }
-
-    // Close the file
-    outputFile.close();
-  }
-  if(tensor.ndimension() == 1)
-  {
-    int64_t  numRows = tensor.size(0);
-    std::ofstream outputFile(filename);
-    // Check if the file is opened successfully
-    if (!outputFile.is_open()) {
-        std::cerr << "Error: Unable to open file for writing." << std::endl;
-        return;
-    }
-     // Iterate over the tensor elements and write them to the file
-    for(int64_t i = 0; i < numRows; ++i) 
-    {
-      // Write each element to the file
-      outputFile << tensor.index({i}).item<float>() << "\n";
-    }
-    outputFile << std::endl; // Move to the next row in the file
-    }
-
-}
-
-//- util functions to write tensors to file to later plot using matplotlib
-void writeTensorToFile(torch::Tensor& tensor, torch::Tensor& additionalTensor, const std::string& filename) {
-    // Check if both tensors are 2D and have compatible sizes
-    if (tensor.ndimension() != 2 || additionalTensor.ndimension() != 1 || tensor.size(0) != additionalTensor.size(0)) {
-        std::cerr << "Error: Incompatible tensors or unsupported dimensions." << std::endl;
-        return;
-    }
-
-    // Get the sizes of the tensor
-    int64_t numRows = tensor.size(0);
-    int64_t numCols = tensor.size(1);
-
-    // Open the file for writing
-    std::ofstream outputFile(filename);
-
-    // Check if the file is opened successfully
-    if (!outputFile.is_open()) {
-        std::cerr << "Error: Unable to open file for writing." << std::endl;
-        return;
-    }
-
-    // Iterate over the tensor elements and write them to the file
-    for (int64_t i = 0; i < numRows; ++i) {
-        for (int64_t j = 0; j < numCols; ++j) {
-            // Write x, y, and C to the file
-            outputFile << i << " " << j << " " << additionalTensor[i].item<float>() << " ";
-            outputFile << tensor.index({i, j}).item<float>() << std::endl;
-        }
-    }
-
-    // Close the file
-    outputFile.close();
-}
-
 //- main 
 int main(int argc,char * argv[])
 {
-
-  torch::cuda::is_available();
+  //- get debug mode
   Dictionary debugDict = Dictionary("../debug.txt");
   bool debug = debugDict.get<bool>("DEBUG");
   if(debug)
     std::cout<<"debug is: "<<debug<<"\n";
+  
   // check if CUDA is avalilable and train on GPU if yes
   auto cuda_available = torch::cuda::is_available();
   auto device_str = cuda_available ? torch::kCUDA : torch::kCPU;
-  //- create device 
+  
+  //- create device reference  
   torch::Device device(device_str);
   //- Info out
   std::cout << (cuda_available ? "CUDA available. Training on GPU.\n" : "Training on CPU.\n") << '\n';
   
-  //- create common Dictionary for both nets
+  
   //- both nets share the same architecture, only network params update
   Dictionary netDict = Dictionary("../params.txt");
   
-  //- create first net primary net, is the one being trained
-  auto net1 = PinNet(netDict);
-  //- create second net place holder for converged net 
-  auto net2 = PinNet(netDict);
-  
-  //- load nets to device if available
-  net1->to(device);
-  net2->to(device);
   //- create dict for mesh
   Dictionary meshDict = Dictionary("../mesh.txt");
+  
+  //- get t_min to see if training from 0 or from checkPoint
+  float t_min = meshDict.get<float>("lbT");
+  //- convert to string to match name of saved pytorch model
+  std::cout<<"lower time bound is: "<<t_min<<std::endl;
+
   //- create dict for thermoPhysical class
   Dictionary thermoDict = Dictionary("../thermo.txt");
+
+  //- create first net primary net, is the one being trained
+  auto net1 = PinNet(netDict);
+  //- create second neural network identical to net1
+  auto net2 = PinNet(netDict);
+  
+  //- if training from a checkPoint and previously saved neural network is available,
+  //- load that neural network 
+  if(t_min != 0)
+  {
+    std::cout<<"training from a checkPoint, loading previous neural net\n"<<std::endl;
+    std::string model_name = "pNet" + std::to_string(t_min) + ".pt";
+    torch::NoGradGuard no_grad;
+    torch::serialize::InputArchive in;
+    try 
+    {
+      in.load_from(model_name);
+      net2->load(in);
+    }
+    catch (const std::exception &e)
+    {
+      std::cerr<< "Error loading model!\n"<<e.what()<<std::endl;
+      throw::std::runtime_error("failed to load previously converged neural net\n");
+    }
+  }
+  
+  //- transfer nets to GPU if available
+  net1->to(device);
+  net2->to(device);
+  
   //- create thermoPhysical object
   thermoPhysical thermo(thermoDict);
+  
   //- create Mesh
   mesh2D mesh(meshDict,net1,net2,device,thermo);
-  // torch::Tensor testLoss = CahnHillard::PDEloss(mesh);
-  // std::cout<<testLoss<<"\n";
   
   //- code to save initial condition for the phase field variable 
   mesh.iIC_ = torch::stack
@@ -164,27 +113,28 @@ int main(int argc,char * argv[])
     std::cout<<mesh.fieldsPDE_<<std::endl;
   }
 
-
+  inference("pNet0.500000.pt", netDict, mesh);
   //- TODO intialize optim paras from dictionary to avoid recompilation 
   //- declare optimizer instance to be used in training
   //- learning rate is decreased over the traning process and the optimizer class instance is changed
-  torch::optim::Adam adam_optim1(mesh.net_->parameters(), torch::optim::AdamOptions(1e-3));  
-  torch::optim::Adam adam_optim2(mesh.net_->parameters(), torch::optim::AdamOptions(1e-4)); 
-  torch::optim::Adam adam_optim3(mesh.net_->parameters(), torch::optim::AdamOptions(1e-5));
-
-
-  // Put info statement here
+    torch::optim::Adam adam_optim1(mesh.net_->parameters(), torch::optim::AdamOptions(1e-3));  
+    torch::optim::Adam adam_optim2(mesh.net_->parameters(), torch::optim::AdamOptions(1e-4)); 
+    torch::optim::Adam adam_optim3(mesh.net_->parameters(), torch::optim::AdamOptions(1e-5));
 
   //- Time marching loop
   for(int N=0;N<2;N++)
   {
+    // torch::optim::Adam adam_optim1(mesh.net_->parameters(), torch::optim::AdamOptions(1e-3));  
+    // torch::optim::Adam adam_optim2(mesh.net_->parameters(), torch::optim::AdamOptions(1e-4)); 
+    // torch::optim::Adam adam_optim3(mesh.net_->parameters(), torch::optim::AdamOptions(1e-5));
+
 
     //- set up epoch loop
     int iter=1;
+    //- init place holder for loss
     float loss;
 
     //- file to print out loss history
-    std::ofstream lossFile("loss.txt");
     std::cout<<"Traning...\n";
     
     //- start profile clock
@@ -209,7 +159,7 @@ int main(int argc,char * argv[])
         }
         //- update network parameters
         optim.step();
-        //- clear gradients for next batch iteration
+        //- clear gradients for next epoch
         optim.zero_grad();
         //- return the average loss
         return totalLoss/mesh.net_->NITER_;
@@ -220,9 +170,7 @@ int main(int argc,char * argv[])
       {
         std::cout<<iter<<"\n";
       }
-
-      //- TODO make it more general by making it a Dict 
-      //  and making all the other parameters as dicts as well
+      
       //- learning rate schedule
       if (iter <= 4000)
       {
@@ -237,20 +185,17 @@ int main(int argc,char * argv[])
         loss = closure(adam_optim3);
       }
       
-      // TODO
-      //- make a dict for all of this, do not recompile the code every time you change something trivial
-
-      //- info out to terminal
-      //- does not work on the cluster for some reason, rely on the loss.txt for info
-      if (iter % 10 == 0) 
+      //- Print out loss info every 10 epochs
+      if (iter % 5 == 0) 
       {
         std::cout << "  iter=" << iter << ", loss=" << std::setprecision(7) << loss<<" lr: "<<adam_optim1.defaults().get_lr()<<"\n";
-        // lossFile<<iter<<" "<<loss<<"\n";
       }
       if(iter % 5000 == 0)
       {
         std::cout<<"saving output..."<<"\n";
+        //- save unconverged model
         std::string modelName = "pNetSave" + std::to_string(mesh.ubT_);
+        //- input grid
         torch::Tensor grid = torch::stack
         (
           {
@@ -285,6 +230,7 @@ int main(int argc,char * argv[])
       }
       iter += 1;
     }
+    
     //- end profile clock
     auto end_time = std::chrono::high_resolution_clock::now();
     
@@ -322,5 +268,6 @@ int main(int argc,char * argv[])
     writeTensorToFile(grid,gridName);
     writeTensorToFile(C1,fieldsName); 
   }
+
   return 0;
 } 

@@ -105,7 +105,7 @@ class  PinNetImpl:
         //- 0 for false else true
         int transient_;
         //- test 
-        int test_;
+        float test_;
         //- number of iterations in each epoch
         int NITER_;
 				//- reset layers of neural network
@@ -383,4 +383,13 @@ torch::Tensor d_d1
 //- once net1 converges, net2 takes the network parameters and acts as an initial 
 //- condition while net1 continues to train
 //- the process repeats each time a net converges or max iters run out
-void loadState(PinNet& net1, PinNet &net2);
+void loadState(PinNet &net1, PinNet &net2);
+
+void inference(std::string path2net,const Dictionary &netDict,mesh2D &mesh);
+
+void visualize_outupt(std::string path2Net,mesh2D &mesh);
+
+
+void writeTensorToFile(const torch::Tensor& tensor, const std::string& filename);
+
+void writeTensorToFile(torch::Tensor& tensor, torch::Tensor& additionalTensor, const std::string& filename);

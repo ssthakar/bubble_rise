@@ -497,6 +497,7 @@ torch::Tensor CahnHillard::C_at_InitialTime(mesh2D &mesh)
   }
   else  
   {
+    torch::NoGradGuard no_grad;
     //- use previous converged neural net as intial conditions
     torch::Tensor Ci = mesh.netPrev_->forward(mesh.iIC_).index({Slice(),3});
     return Ci;
@@ -870,7 +871,7 @@ thermoPhysical::thermoPhysical(Dictionary &dict)
   C = 1.06066017178;
 }
 
-
+//- function to transfer learned parameters from one neural network to another
 void loadState(PinNet& net1, PinNet &net2)
 {
 
@@ -881,41 +882,110 @@ void loadState(PinNet& net1, PinNet &net2)
   torch::serialize::InputArchive in;
   in.load_from("serialized.pt");
   net2->load(in);
-  // auto net2_params = net2->named_parameters();
-  // auto net1_params = net1->named_parameters(true);
-  // auto net1_buffer = net1->named_buffers(true);
-  // for(auto &val : net2_params)
-  // {
-  //   auto name = val.key();
-  //   auto *t = net1_params.find(name);
-  //   if(t!=nullptr)
-  //   {
-  //     t->copy_(val.value());
-  //   }
-  //   else
-  //   {
-  //     t= net1_buffer.find(name);
-  //     if (t !=nullptr)
-  //     {
-  //       t->copy_(val.value());
-  //       
-  //     }
-  //   }
-  // }
 } 
 
 
+//- function to visualize phasefield output based on saved torch net
+void inference(std::string path2net,const Dictionary &netDict,mesh2D &mesh)
+{
+  std::cout<<"inferring based on saved model";
+  //- init input archive to load in saved pytorch model
+  torch::serialize::InputArchive in;
+  in.load_from(path2net);
+  auto net = PinNet(netDict);
+  net->load(in);
+  torch::Tensor grid = torch::stack
+  (
+    {
+      torch::flatten(mesh.xyGrid[0]),
+      torch::flatten(mesh.xyGrid[1]),
+      torch::full_like(torch::flatten(mesh.xyGrid[1]),3.0) //time values 
+    },1
+  );
+  torch::Tensor C = net->forward(grid);
+  writeTensorToFile(grid,"grid_inference.txt");
+  writeTensorToFile(C,"field_inference.txt");
 
+}
 
+//- util functions to write tensors to file to later plot using matplotlib
+void writeTensorToFile(const torch::Tensor& tensor, const std::string& filename) {
+    // Check if the tensor is 2D
+  if (tensor.ndimension() == 2) 
+  {
+    // Get the sizes of the tensor
+    int64_t numRows = tensor.size(0);
+    int64_t numCols = tensor.size(1);
 
+    // Open the file for writing
+    std::ofstream outputFile(filename);
 
+    // Check if the file is opened successfully
+    if (!outputFile.is_open()) {
+        std::cerr << "Error: Unable to open file for writing." << std::endl;
+        return;
+    }
 
+    // Iterate over the tensor elements and write them to the file
+    for (int64_t i = 0; i < numRows; ++i) {
+        for (int64_t j = 0; j < numCols; ++j) {
+            // Write each element to the file
+            outputFile << tensor.index({i, j}).item<float>() << " ";
+        }
+        outputFile << std::endl; // Move to the next row in the file
+    }
 
+    // Close the file
+    outputFile.close();
+  }
+  if(tensor.ndimension() == 1)
+  {
+    int64_t  numRows = tensor.size(0);
+    std::ofstream outputFile(filename);
+    // Check if the file is opened successfully
+    if (!outputFile.is_open()) {
+        std::cerr << "Error: Unable to open file for writing." << std::endl;
+        return;
+    }
+     // Iterate over the tensor elements and write them to the file
+    for(int64_t i = 0; i < numRows; ++i) 
+    {
+      // Write each element to the file
+      outputFile << tensor.index({i}).item<float>() << "\n";
+    }
+    outputFile << std::endl; // Move to the next row in the file
+    }
 
+}
 
+//- util functions to write tensors to file to later plot using matplotlib
+void writeTensorToFile(torch::Tensor& tensor, torch::Tensor& additionalTensor, const std::string& filename) {
+    // Check if both tensors are 2D and have compatible sizes
+    if (tensor.ndimension() != 2 || additionalTensor.ndimension() != 1 || tensor.size(0) != additionalTensor.size(0)) {
+        std::cerr << "Error: Incompatible tensors or unsupported dimensions." << std::endl;
+        return;
+    }
+    // Get the sizes of the tensor
+    int64_t numRows = tensor.size(0);
+    int64_t numCols = tensor.size(1);
+    // Open the file for writing
+    std::ofstream outputFile(filename);
 
-
-
-
+    // Check if the file is opened successfully
+    if (!outputFile.is_open()) {
+        std::cerr << "Error: Unable to open file for writing." << std::endl;
+        return;
+    }
+    // Iterate over the tensor elements and write them to the file
+    for (int64_t i = 0; i < numRows; ++i) {
+        for (int64_t j = 0; j < numCols; ++j) {
+            // Write x, y, and C to the file
+            outputFile << i << " " << j << " " << additionalTensor[i].item<float>() << " ";
+            outputFile << tensor.index({i, j}).item<float>() << std::endl;
+        }
+    }
+    // Close the file
+    outputFile.close();
+}
 
 
