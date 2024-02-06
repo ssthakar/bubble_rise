@@ -19,7 +19,7 @@ triang = tri.Triangulation(x, y)
 
 # Plotting the tricontourf plot
 plt.figure(figsize=(8, 6))
-contour = plt.tricontourf(triang, temperature, cmap='viridis',levels=np.linspace(-1.1,1.1,100))  # Adjust colormap as needed
+contour = plt.tricontourf(triang, temperature, cmap='viridis',levels=np.linspace())  # Adjust colormap as needed
 plt.colorbar(contour)  # Add color bar indicating temperature scale
 plt.title('Temperature Tricontour Plot')
 plt.xlabel('X-axis')

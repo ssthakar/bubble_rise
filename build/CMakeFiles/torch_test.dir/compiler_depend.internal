@@ -814,6 +814,8 @@ CMakeFiles/torch_test.dir/main.cpp.o
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/xlogy_ops.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/xor_ops.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/zero_ops.h
+ /home/kazeshini/Ctorch/libtorch/include/ATen/core/grad_mode.h
+ /home/kazeshini/Ctorch/libtorch/include/c10/core/GradMode.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/empty.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/Context.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/CPUGeneratorImpl.h
@@ -901,6 +903,7 @@ CMakeFiles/torch_test.dir/main.cpp.o
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/flatten.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/meshgrid.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/meshgrid_ops.h
+ /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mode.h
  /usr/include/c++/11/fstream
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h
@@ -973,8 +976,6 @@ CMakeFiles/torch_test.dir/main.cpp.o
  /usr/include/c++/11/thread
  /usr/include/c++/11/bits/std_thread.h
  /usr/include/c++/11/bits/this_thread_sleep.h
- /home/kazeshini/Ctorch/libtorch/include/ATen/core/grad_mode.h
- /home/kazeshini/Ctorch/libtorch/include/c10/core/GradMode.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/core/op_registration/op_allowlist.h
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/jit/frontend/function_schema_parser.h
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/jit/runtime/operator_options.h
@@ -1009,20 +1010,11 @@ CMakeFiles/torch_test.dir/main.cpp.o
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/jit/api/compilation_unit.h
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/jit/frontend/name_mangler.h
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/cuda.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/torch.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/all.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/autograd.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/autograd_not_implemented_fallback.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/custom_function.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/function.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/anomaly_mode.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/grad_mode.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/graph_task.h
- /home/kazeshini/Ctorch/libtorch/include/c10/util/ThreadLocal.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/input_buffer.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/utils/warnings.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/input_metadata.h
- /home/kazeshini/Ctorch/libtorch/include/ATen/ExpandUtils.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/serialize/input-archive.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/types.h
+ /home/kazeshini/Ctorch/libtorch/include/ATen/ATen.h
+ /home/kazeshini/Ctorch/libtorch/include/ATen/Device.h
+ /home/kazeshini/Ctorch/libtorch/include/ATen/Dispatch.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/Functions.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/from_blob.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/tensor.h
@@ -2483,7 +2475,6 @@ CMakeFiles/torch_test.dir/main.cpp.o
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mkldnn_rnn_layer_backward.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mkldnn_rnn_layer_backward_ops.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mm.h
- /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mode.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/moveaxis.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/movedim.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mps_convolution_backward.h
@@ -3121,22 +3112,9 @@ CMakeFiles/torch_test.dir/main.cpp.o
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/zeros_ops.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/zeros_like.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/zeros_like_ops.h
- /home/kazeshini/Ctorch/libtorch/include/ATen/NestedTensorImpl.h
- /home/kazeshini/Ctorch/libtorch/include/ATen/MemoryOverlap.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/saved_variable.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/saved_variable_hooks.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader/stateful.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader/base.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader_options.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/arg.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/types.h
- /home/kazeshini/Ctorch/libtorch/include/ATen/ATen.h
- /home/kazeshini/Ctorch/libtorch/include/ATen/Device.h
- /home/kazeshini/Ctorch/libtorch/include/ATen/Dispatch.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ScalarOps.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/TensorIndexing.h
+ /home/kazeshini/Ctorch/libtorch/include/ATen/ExpandUtils.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/NativeFunctions.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_adaptive_avg_pool2d_native.h
  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_adaptive_avg_pool2d_backward_native.h
@@ -4657,6 +4635,29 @@ CMakeFiles/torch_test.dir/main.cpp.o
  /home/kazeshini/Ctorch/libtorch/include/ATen/core/UnsafeFromTH.h
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/generated/variable_factories.h
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/detail/TensorDataContainer.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/torch.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/all.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/autograd.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/autograd_not_implemented_fallback.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/custom_function.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/function.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/anomaly_mode.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/grad_mode.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/graph_task.h
+ /home/kazeshini/Ctorch/libtorch/include/c10/util/ThreadLocal.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/input_buffer.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/utils/warnings.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/input_metadata.h
+ /home/kazeshini/Ctorch/libtorch/include/ATen/NestedTensorImpl.h
+ /home/kazeshini/Ctorch/libtorch/include/ATen/MemoryOverlap.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/saved_variable.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/saved_variable_hooks.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader/stateful.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader/base.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader_options.h
+ /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/arg.h
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/detail/data_shuttle.h
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/detail/queue.h
  /usr/include/c++/11/queue
@@ -4678,7 +4679,6 @@ CMakeFiles/torch_test.dir/main.cpp.o
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/samplers/sequential.h
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/samplers/serialize.h
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/serialize/archive.h
- /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/serialize/input-archive.h
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/serialize/output-archive.h
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/samplers/stream.h
  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/serialize.h

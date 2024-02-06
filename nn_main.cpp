@@ -20,6 +20,7 @@
 #include <torch/csrc/autograd/autograd.h>
 #include <torch/csrc/autograd/function.h>
 #include <torch/csrc/autograd/generated/variable_factories.h>
+#include <torch/nn/init.h>
 #include <torch/nn/modules/activation.h>
 #include <torch/nn/modules/batchnorm.h>
 #include <torch/nn/modules/linear.h>
@@ -46,33 +47,16 @@ void PinNetImpl::create_layers()
   {
     //- hiden layer name
     std::string layer_name = "fc_hidden" + std::to_string(i);
-    
     //- create and register each hidden layer
     torch::nn::Linear linear_layer = register_module
     (
       layer_name,
       torch::nn::Linear(HIDDEN_LAYER_DIM,HIDDEN_LAYER_DIM)
     );
-
     //- intialize network parameters
     torch::nn::init::xavier_normal_(linear_layer->weight);
-    
     //- populate sequential with layers
     hidden_layers->push_back(linear_layer);
-    
-    /*
-    //- batch normalization layers 
-    std::string batchNormName = "fc_batchNorm" + std::to_string(i);
-    torch::nn::BatchNorm1d batchNormLayer = register_module
-    (
-      batchNormName,
-      torch::nn::BatchNorm1d(HIDDEN_LAYER_DIM)
-    );
-    
-    //- push back batch-normalization layer
-    hidden_layers->push_back(batchNormLayer);
-    */
-
     //- create and register activation functions 
     hidden_layers->push_back
     (
@@ -83,7 +67,6 @@ void PinNetImpl::create_layers()
       )
     );
   }
-
   //- register output layer
   output = register_module
   (
@@ -133,6 +116,7 @@ torch::Tensor PinNetImpl::forward
   return I;
 }
 
+//- reset neural network object instance in place, no need to pass params again to opimizer
 void PinNetImpl::reset_layers() {
   //- reset the parameters for the input and output layers
   input->reset_parameters();
@@ -140,9 +124,11 @@ void PinNetImpl::reset_layers() {
   //- loop through all the layers in sequential
   for (int i = 0; i < hidden_layers->size(); i++) {
     //- check if the layer being iterated is a linear layer or not
-    if (auto linear_layer =
+    if (torch::nn::LinearImpl * linear_layer =
             dynamic_cast<torch::nn::LinearImpl *>(hidden_layers[i].get())) {
-      hidden_layers[i]->as<torch::nn::Linear>()->reset_parameters();
+      // hidden_layers[i]->as<torch::nn::Linear>()->reset_parameters();
+      torch::nn::init::xavier_normal_(linear_layer->weight);
+      // std::cout<<"resetting layer: "<<linear_layer->name()<<std::endl;
     }
   }
 }
@@ -282,20 +268,15 @@ torch::Tensor CahnHillard::CahnHillard2D
 {
   const float &e = mesh.thermo_.epsilon;
   const float &Mo = mesh.thermo_.Mo;
-  //- u vel
   const torch::Tensor &u = mesh.fieldsPDE_.index({Slice(),0});
-  //- v vel
   const torch::Tensor &v = mesh.fieldsPDE_.index({Slice(),1});
-  //- phase field var
   const torch::Tensor &C = mesh.fieldsPDE_.index({Slice(),3});
-  //- derivatives 
   torch::Tensor dC_dt = d_d1(C,mesh.iPDE_,2);
   torch::Tensor dC_dx = d_d1(C,mesh.iPDE_,0);
   torch::Tensor dC_dy = d_d1(C,mesh.iPDE_,1);
   torch::Tensor phi = CahnHillard::phi(mesh);
   torch::Tensor dphi_dxx = d_dn(phi,mesh.iPDE_,2,0);
   torch::Tensor dphi_dyy = d_dn(phi,mesh.iPDE_,2,1);
-  //- loss term
   torch::Tensor loss = dC_dt + u*dC_dx + v*dC_dy - 
     Mo*(dphi_dxx + dphi_dyy);
   return torch::mse_loss(loss,torch::zeros_like(loss));
@@ -330,9 +311,7 @@ torch::Tensor CahnHillard::L_MomX2d
   const torch::Tensor &v = mesh.fieldsPDE_.index({Slice(),1});
   const torch::Tensor &p = mesh.fieldsPDE_.index({Slice(),2});
   const torch::Tensor &C = mesh.fieldsPDE_.index({Slice(),3});
-  //- get density of mixture TODO correct this function to take in just mesh
   torch::Tensor rhoM = CahnHillard::thermoProp(rhoL, rhoG, mesh.fieldsPDE_);
-  //- get viscosity of mixture
   torch::Tensor muM = CahnHillard::thermoProp(muL, muG, mesh.fieldsPDE_);
   torch::Tensor du_dt = d_d1(u,mesh.iPDE_,2);
   torch::Tensor du_dx = d_d1(u,mesh.iPDE_,0);
@@ -341,15 +320,12 @@ torch::Tensor CahnHillard::L_MomX2d
   torch::Tensor dC_dx = d_d1(C,mesh.iPDE_,0);
   torch::Tensor dC_dy = d_d1(C,mesh.iPDE_,1);
   torch::Tensor dp_dx = d_d1(p,mesh.iPDE_,0);
-  //- derivative order first spatial variable later
   torch::Tensor du_dxx = d_dn(u,mesh.iPDE_,2,0);
   torch::Tensor du_dyy = d_dn(u,mesh.iPDE_,2,1);
-  //- get x component of the surface tension force
   torch::Tensor fx = CahnHillard::surfaceTension(mesh,0);
   torch::Tensor loss1 = rhoM*(du_dt + u*du_dx + v*du_dy) + dp_dx;
   torch::Tensor loss2 = -0.5*(muL - muG)*dC_dy*(du_dy + dv_dx) - (muL -muG)*dC_dx*du_dx;
   torch::Tensor loss3 = -muM*(du_dxx + du_dyy) - fx;
-  //- division by rhoL for normalization, loss starts out very large otherwise
   torch::Tensor loss = (loss1 + loss2 + loss3)/rhoL;
   return torch::mse_loss(loss, torch::zeros_like(loss));
 }
@@ -360,23 +336,15 @@ torch::Tensor CahnHillard::L_MomY2d
   const mesh2D &mesh
 )
 {
-	// density of liquid phase
   float &rhoL = mesh.thermo_.rhoL;
-	// dynamic  viscosity of liquid phase
   float &muL = mesh.thermo_.muL;
-	// density of vapor phase
   float rhoG = mesh.thermo_.rhoG;
-  // dynamic viscosity of vapor pahse
 	float muG = mesh.thermo_.muG;
-
-	//- field variables
   const torch::Tensor &u = mesh.fieldsPDE_.index({Slice(),0});
   const torch::Tensor &v = mesh.fieldsPDE_.index({Slice(),1});
   const torch::Tensor &p = mesh.fieldsPDE_.index({Slice(),2});
   const torch::Tensor &C = mesh.fieldsPDE_.index({Slice(),3});
-  //- get density of mixture TODO correct this function to take in just mesh
   torch::Tensor rhoM = CahnHillard::thermoProp(rhoL, rhoG, mesh.fieldsPDE_);
-  //- get viscosity of mixture
   torch::Tensor muM = CahnHillard::thermoProp(muL, muG, mesh.fieldsPDE_);
   torch::Tensor dv_dt = d_d1(v,mesh.iPDE_,2);
   torch::Tensor dv_dx = d_d1(v,mesh.iPDE_,0);
@@ -385,10 +353,8 @@ torch::Tensor CahnHillard::L_MomY2d
   torch::Tensor dC_dx = d_d1(C,mesh.iPDE_,0);
   torch::Tensor dC_dy = d_d1(C,mesh.iPDE_,1);
   torch::Tensor dp_dy = d_d1(p,mesh.iPDE_,1);
-  //- derivative order first spatial variable later
   torch::Tensor dv_dxx = d_dn(v,mesh.iPDE_,2,0);
   torch::Tensor dv_dyy = d_dn(v,mesh.iPDE_,2,1);
-  //- get x component of the surface tension force
   torch::Tensor fy = CahnHillard::surfaceTension(mesh,1);
   torch::Tensor gy = torch::full_like(fy,-0.98);
   torch::Tensor loss1 = rhoM*(dv_dt + u*dv_dx + v*dv_dy) + dp_dy;
@@ -440,13 +406,10 @@ torch::Tensor CahnHillard::BCloss(mesh2D &mesh)
   
   //- total boundary loss for u, v and C
   torch::Tensor lossLeft = CahnHillard::slipWall(mesh.fieldsLeft_, mesh.iLeftWall_,0); 
-       //+ CahnHillard::zeroGrad(Cleft, mesh.iLeftWall_, 0);
   torch::Tensor lossRight = CahnHillard::slipWall(mesh.fieldsRight_,mesh.iRightWall_, 0);
-       //+ CahnHillard::zeroGrad(Cright, mesh.iRightWall_, 0);
   torch::Tensor lossTop = CahnHillard::noSlipWall(mesh.fieldsTop_, mesh.iTopWall_);
-       //+ CahnHillard::zeroGrad(Ctop, mesh.iTopWall_, 1);
   torch::Tensor lossBottom = CahnHillard::noSlipWall(mesh.fieldsBottom_, mesh.iBottomWall_);
-       //+ CahnHillard::zeroGrad(Cbottom, mesh.iBottomWall_, 1);
+  //- return total boundary loss for all four boundaries
   return lossLeft + lossRight + lossTop + lossBottom;
 }
 
@@ -486,18 +449,17 @@ torch::Tensor CahnHillard::C_at_InitialTime(mesh2D &mesh)
     const float &xc = mesh.xc;
     const float &yc = mesh.yc;
     const float &e = mesh.thermo_.epsilon;
-    //- x 
+    //- x  coords
     const torch::Tensor &x = mesh.iIC_.index({Slice(),0});
-    //- y
+    //- y coords
     const torch::Tensor &y = mesh.iIC_.index({Slice(),1});
-    //- intial condition
+    //- intial condition if starting from t=0
     torch::Tensor Ci =torch::tanh((torch::sqrt(torch::pow(x - xc, 2) + torch::pow(y - yc, 2)) - 0.25)/ (1.41421356237 * e));
     
     return Ci;
   }
   else  
   {
-    torch::NoGradGuard no_grad;
     //- use previous converged neural net as intial conditions
     torch::Tensor Ci = mesh.netPrev_->forward(mesh.iIC_).index({Slice(),3});
     return Ci;

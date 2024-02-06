@@ -4,9 +4,9 @@ lbY         -1
 ubY         1
 lbT         0
 ubT         0.5
-dx          0.005
-dy          0.005
-dt          0.005
+dx          0.01
+dy          0.01
+dt          0.01
 stepSize    0.5
 xc          0 
 yc          -0.5

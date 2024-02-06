@@ -813,6 +813,8 @@ CMakeFiles/torch_test.dir/main.cpp.o: ../main.cpp \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/xlogy_ops.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/xor_ops.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/zero_ops.h \
+  /home/kazeshini/Ctorch/libtorch/include/ATen/core/grad_mode.h \
+  /home/kazeshini/Ctorch/libtorch/include/c10/core/GradMode.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/empty.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/Context.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/CPUGeneratorImpl.h \
@@ -900,6 +902,7 @@ CMakeFiles/torch_test.dir/main.cpp.o: ../main.cpp \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/flatten.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/meshgrid.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/meshgrid_ops.h \
+  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mode.h \
   /usr/include/c++/11/fstream \
   /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
@@ -972,8 +975,6 @@ CMakeFiles/torch_test.dir/main.cpp.o: ../main.cpp \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/bits/std_thread.h \
   /usr/include/c++/11/bits/this_thread_sleep.h \
-  /home/kazeshini/Ctorch/libtorch/include/ATen/core/grad_mode.h \
-  /home/kazeshini/Ctorch/libtorch/include/c10/core/GradMode.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/core/op_registration/op_allowlist.h \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/jit/frontend/function_schema_parser.h \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/jit/runtime/operator_options.h \
@@ -1008,20 +1009,11 @@ CMakeFiles/torch_test.dir/main.cpp.o: ../main.cpp \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/jit/api/compilation_unit.h \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/jit/frontend/name_mangler.h \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/cuda.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/torch.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/all.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/autograd.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/autograd_not_implemented_fallback.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/custom_function.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/function.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/anomaly_mode.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/grad_mode.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/graph_task.h \
-  /home/kazeshini/Ctorch/libtorch/include/c10/util/ThreadLocal.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/input_buffer.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/utils/warnings.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/input_metadata.h \
-  /home/kazeshini/Ctorch/libtorch/include/ATen/ExpandUtils.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/serialize/input-archive.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/types.h \
+  /home/kazeshini/Ctorch/libtorch/include/ATen/ATen.h \
+  /home/kazeshini/Ctorch/libtorch/include/ATen/Device.h \
+  /home/kazeshini/Ctorch/libtorch/include/ATen/Dispatch.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/Functions.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/from_blob.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/tensor.h \
@@ -2482,7 +2474,6 @@ CMakeFiles/torch_test.dir/main.cpp.o: ../main.cpp \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mkldnn_rnn_layer_backward.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mkldnn_rnn_layer_backward_ops.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mm.h \
-  /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mode.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/moveaxis.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/movedim.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mps_convolution_backward.h \
@@ -3120,22 +3111,9 @@ CMakeFiles/torch_test.dir/main.cpp.o: ../main.cpp \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/zeros_ops.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/zeros_like.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/zeros_like_ops.h \
-  /home/kazeshini/Ctorch/libtorch/include/ATen/NestedTensorImpl.h \
-  /home/kazeshini/Ctorch/libtorch/include/ATen/MemoryOverlap.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/saved_variable.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/saved_variable_hooks.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader/stateful.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader/base.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader_options.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/arg.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/types.h \
-  /home/kazeshini/Ctorch/libtorch/include/ATen/ATen.h \
-  /home/kazeshini/Ctorch/libtorch/include/ATen/Device.h \
-  /home/kazeshini/Ctorch/libtorch/include/ATen/Dispatch.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ScalarOps.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/TensorIndexing.h \
+  /home/kazeshini/Ctorch/libtorch/include/ATen/ExpandUtils.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/NativeFunctions.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_adaptive_avg_pool2d_native.h \
   /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_adaptive_avg_pool2d_backward_native.h \
@@ -4656,6 +4634,29 @@ CMakeFiles/torch_test.dir/main.cpp.o: ../main.cpp \
   /home/kazeshini/Ctorch/libtorch/include/ATen/core/UnsafeFromTH.h \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/generated/variable_factories.h \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/detail/TensorDataContainer.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/torch.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/all.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/autograd.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/autograd_not_implemented_fallback.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/custom_function.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/function.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/anomaly_mode.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/grad_mode.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/graph_task.h \
+  /home/kazeshini/Ctorch/libtorch/include/c10/util/ThreadLocal.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/input_buffer.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/utils/warnings.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/input_metadata.h \
+  /home/kazeshini/Ctorch/libtorch/include/ATen/NestedTensorImpl.h \
+  /home/kazeshini/Ctorch/libtorch/include/ATen/MemoryOverlap.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/saved_variable.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/saved_variable_hooks.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader/stateful.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader/base.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader_options.h \
+  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/arg.h \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/detail/data_shuttle.h \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/detail/queue.h \
   /usr/include/c++/11/queue \
@@ -4677,7 +4678,6 @@ CMakeFiles/torch_test.dir/main.cpp.o: ../main.cpp \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/samplers/sequential.h \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/samplers/serialize.h \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/serialize/archive.h \
-  /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/serialize/input-archive.h \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/serialize/output-archive.h \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/samplers/stream.h \
   /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/serialize.h \
@@ -10012,6 +10012,36 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/detail/queue.h:
 
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/arg.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader/base.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader/stateful.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/saved_variable_hooks.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/MemoryOverlap.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/NestedTensorImpl.h:
+
+/home/kazeshini/Ctorch/libtorch/include/c10/util/ThreadLocal.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/grad_mode.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/function.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/custom_function.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/autograd_not_implemented_fallback.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/autograd.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/all.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/torch.h:
+
 /home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/generated/variable_factories.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/core/Scalar.h:
@@ -10444,6 +10474,10 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/native_layer_norm_backward_native.h:
 
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/native_group_norm_native.h:
+
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/native_channel_shuffle_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/native_batch_norm_backward_native.h:
@@ -10485,6 +10519,10 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mps_convolution_backward_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/moveaxis_native.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/graph_task.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/mm_meta.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mkldnn_rnn_layer_native.h:
 
@@ -10589,6 +10627,10 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/miopen_batch_norm_backward_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/logcumsumexp_native.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/input_buffer.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/logaddexp2_meta.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/logaddexp_meta.h:
 
@@ -10924,6 +10966,12 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/embedding_sparse_backward_native.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/11/include/amxint8intrin.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/input_metadata.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/elu_meta.h:
+
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/dsplit_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/div_native.h:
@@ -11247,6 +11295,10 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_weight_norm_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_version_native.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/anomaly_mode.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_validate_sparse_csr_tensor_args_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_validate_sparse_coo_tensor_args_native.h:
 
@@ -11741,26 +11793,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_adaptive_avg_pool2d_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/NativeFunctions.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/Dispatch.h:
-
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/arg.h:
-
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader/base.h:
-
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader/stateful.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/native_group_norm_native.h:
-
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data/dataloader.h:
-
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/data.h:
-
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/saved_variable_hooks.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/MemoryOverlap.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/NestedTensorImpl.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/zeros_like_ops.h:
 
@@ -12494,6 +12526,10 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/randn.h:
 
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/utils/warnings.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/randint_like_ops.h:
+
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/randint_like.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/randint_ops.h:
@@ -12571,10 +12607,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/pixel_unshuffle.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/pixel_shuffle_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/Device.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/pin_memory.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/permute_copy_ops.h:
 
@@ -12800,10 +12832,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/movedim.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/special_log_softmax_native.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/mode.h:
-
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mm.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mkldnn_rnn_layer_backward_ops.h:
@@ -13008,17 +13036,11 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/logical_xor.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/logical_not.h:
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/unfold_backward_ops.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_to_sparse_csr_native.h:
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_cudnn_ctc_loss_ops.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/logdet.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/rsub_native.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/logcumsumexp.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/log_softmax.h:
+/usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/special_sinc_ops.h:
 
@@ -13110,6 +13132,10 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /usr/include/c++/11/typeindex:
 
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_cudnn_ctc_loss.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/adaptive_max_pool2d_backward.h:
+
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_conj_copy_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_sparse_semi_structured_linear_ops.h:
@@ -13140,10 +13166,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/TensorUtils.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_adaptive_avg_pool3d_backward_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/c10/core/impl/VirtualGuardImpl.h:
-
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_adaptive_avg_pool3d_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/embedding_renorm_ops.h:
@@ -13170,23 +13192,25 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/t_ops.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/mm_meta.h:
+/home/kazeshini/Ctorch/libtorch/include/ATen/Dispatch.h:
 
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/graph_task.h:
+/usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/expand_copy_native.h:
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_nested_select_backward_native.h:
 
-/home/kazeshini/Ctorch/libtorch/include/c10/util/Float8_e5m2.h:
+/home/kazeshini/Ctorch/libtorch/include/c10/util/qint32.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_validate_sparse_csr_tensor_args_native.h:
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_adaptive_avg_pool3d_backward_ops.h:
 
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/anomaly_mode.h:
+/home/kazeshini/Ctorch/libtorch/include/c10/core/impl/VirtualGuardImpl.h:
 
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/autograd.h:
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_upsample_bilinear2d_aa_native.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_aminmax_ops.h:
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/jit/ir/graph_node_list.h:
 
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/all.h:
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/bilinear_ops.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/glu_backward_jvp_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/max_pool3d_with_indices.h:
 
@@ -13218,10 +13242,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_to_dense_ops.h:
 
-/home/kazeshini/Ctorch/libtorch/include/c10/util/ThreadLocal.h:
-
-/usr/include/c++/11/bits/enable_special_members.h:
-
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/less_equal_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/torch/library.h:
@@ -13234,19 +13254,7 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/core/op_registration/op_allowlist.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/core/grad_mode.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/resize_as_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/fft_ihfft.h:
-
 /usr/include/c++/11/thread:
-
-/usr/include/x86_64-linux-gnu/bits/byteswap.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_nested_select_backward_native.h:
-
-/home/kazeshini/Ctorch/libtorch/include/c10/util/qint32.h:
 
 /usr/include/c++/11/bits/stl_list.h:
 
@@ -13411,6 +13419,12 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/TensorGeometry.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/imag_ops.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/pin_memory.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/Device.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/coalesce.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/DimVector.h:
 
@@ -13594,6 +13608,12 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_thnn_fused_lstm_cell.h:
 
+/home/kazeshini/Ctorch/libtorch/include/ATen/core/grad_mode.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/resize_as_ops.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/fft_ihfft.h:
+
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/soft_margin_loss_backward_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/zero_ops.h:
@@ -13659,12 +13679,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/argmin_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/unbind_ops.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/amxint8intrin.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/elu_meta.h:
-
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/input_metadata.h:
 
 /usr/include/x86_64-linux-gnu/bits/time.h:
 
@@ -13783,8 +13797,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/isinf_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/scatter_reduce_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/torch.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/scatter_ops.h:
 
@@ -14334,6 +14346,10 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/core/DeprecatedTypePropertiesRegistry.h:
 
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_to_sparse_csr_native.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/logdet.h:
+
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/upsample_bilinear2d_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/reshape_as.h:
@@ -14351,6 +14367,8 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_foreach_trunc.h:
 
 /usr/include/c++/11/bits/basic_ios.tcc:
+
+/usr/include/c++/11/bits/enable_special_members.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/special_legendre_polynomial_p_ops.h:
 
@@ -14398,6 +14416,10 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /usr/include/c++/11/pstl/glue_algorithm_defs.h:
 
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/special_psi.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/hspmm.h:
+
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_conj_native.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
@@ -14429,8 +14451,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/core/functional.h:
 
 /home/kazeshini/Ctorch/libtorch/include/c10/util/bits.h:
-
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/function.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/to_dense_ops.h:
 
@@ -14489,12 +14509,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/lt_meta.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_dirichlet_grad.h:
-
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/autograd_not_implemented_fallback.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_fused_adamw_native.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_linalg_slogdet_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_foreach_cos_native.h:
 
@@ -14562,6 +14576,8 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
 
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_aminmax_ops.h:
+
 /usr/include/c++/11/bits/ostream_insert.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_triton_multi_head_attention.h:
@@ -14585,6 +14601,8 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/count_nonzero_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/ccol_indices_ops.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_cudnn_init_dropout_state.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/copysign_native.h:
 
@@ -14639,6 +14657,10 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/instance_norm.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/special_log_softmax_native.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/mode.h:
 
 /usr/include/c++/11/bits/ios_base.h:
 
@@ -14878,11 +14900,17 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/cos_ops.h:
 
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/rsub_native.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/logcumsumexp.h:
+
 /home/kazeshini/Ctorch/libtorch/include/ATen/SavedTensorHooks.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/div_meta.h:
 
 /usr/include/c++/11/unordered_map:
+
+/usr/include/c++/11/bits/atomic_lockfree_defines.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/lstm_native.h:
 
@@ -15016,14 +15044,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/digamma.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_upsample_bilinear2d_aa_native.h:
-
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/jit/ir/graph_node_list.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/bilinear_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/glu_backward_jvp_ops.h:
-
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_foreach_norm_native.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
@@ -15039,8 +15059,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_pad_enum_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/batch_norm_backward_elemt_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/custom_function.h:
 
 /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
 
@@ -15374,8 +15392,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /usr/include/c++/11/tr1/gamma.tcc:
 
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/grad_mode.h:
-
 /home/kazeshini/Ctorch/libtorch/include/c10/core/WrapDimMinimal.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mkldnn_convolution_ops.h:
@@ -15458,9 +15474,9 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/c10/macros/cmake_macros.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/logical_or.h:
-
 /home/kazeshini/Ctorch/libtorch/include/ATen/core/boxing/KernelFunction_impl.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/logical_or.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/inner_ops.h:
 
@@ -15632,12 +15648,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_debug_has_internal_overlap.h:
 
-/usr/include/x86_64-linux-gnu/bits/waitflags.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/unfold_backward_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_cudnn_ctc_loss_ops.h:
-
 /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/nn/modules/_functions.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/arcsin_ops.h:
@@ -15725,10 +15735,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/fft.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/conj_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/l1_loss.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_sparse_bsr_tensor_unsafe.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/pow_meta.h:
 
@@ -15992,6 +15998,10 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/linalg_lstsq.h:
 
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/expand_copy_native.h:
+
+/home/kazeshini/Ctorch/libtorch/include/c10/util/Float8_e5m2.h:
+
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/mm_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_nested_from_padded_and_nested_example_native.h:
@@ -16062,14 +16072,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/addmv.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/randint_like_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/utils/warnings.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/fmod_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/batch_norm_backward_reduce.h:
-
 /home/kazeshini/Ctorch/libtorch/include/c10/core/Stream.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/fractional_max_pool2d_backward_native.h:
@@ -16090,9 +16092,9 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
 
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/serialize/input-archive.h:
-
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/special_log_ndtr_ops.h:
+
+/home/kazeshini/Ctorch/libtorch/include/torch/csrc/api/include/torch/serialize/input-archive.h:
 
 /home/kazeshini/Ctorch/libtorch/include/c10/util/Float8_e4m3fn.h:
 
@@ -16199,6 +16201,22 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/to_mkldnn_backward_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/bitwise_and_ops.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_foreach_add_native.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/rad2deg.h:
+
+/usr/include/c++/11/streambuf:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_cudnn_rnn_ops.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/scatter_add.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/angle_ops.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/matrix_power_ops.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/layer_norm_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/logical_not_ops.h:
 
@@ -16460,8 +16478,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/logical_xor_ops.h:
 
-/usr/include/c++/11/bits/atomic_lockfree_defines.h:
-
 /usr/include/c++/11/tr1/bessel_function.tcc:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_fake_quantize_learnable_per_tensor_affine_backward.h:
@@ -16473,22 +16489,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_conj_physical_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/linalg_solve_ex.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/scatter_add.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/angle_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_foreach_add_native.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/rad2deg.h:
-
-/usr/include/c++/11/streambuf:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_cudnn_rnn_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/matrix_power_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/layer_norm_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_functional_sym_constrain_range_for_size.h:
 
@@ -16822,16 +16822,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/flatten_dense_tensors_ops.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/logaddexp2_meta.h:
-
-/home/kazeshini/Ctorch/libtorch/include/torch/csrc/autograd/input_buffer.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/avx512dqintrin.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_fused_moving_avg_obs_fq_helper_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/conv1d_ops.h:
-
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/gru_cell_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/selu_ops.h:
@@ -16851,16 +16841,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/expand_as.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/fill_ops.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_cudnn_ctc_loss.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/adaptive_max_pool2d_backward.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_cudnn_init_dropout_state.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/special_psi.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/hspmm.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_cudnn_rnn_backward_ops.h:
 
@@ -17302,14 +17282,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_foreach_sub.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/max_pool1d_native.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/logaddexp.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/fake_quantize_per_channel_affine_cachemask.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_foreach_sub_ops.h:
-
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_foreach_tan_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/repeat_native.h:
@@ -17495,6 +17467,10 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/as_strided_copy_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_linalg_slogdet.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_fused_adamw_native.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_linalg_slogdet_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_linalg_solve_ex.h:
 
@@ -18110,10 +18086,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_test_functorch_fallback_ops.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/histogramdd.h:
-
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/conv1d.h:
-
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_test_optional_intlist_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/TensorIterator.h:
@@ -18606,6 +18578,10 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/deg2rad.h:
 
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/fmod_ops.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/batch_norm_backward_reduce.h:
+
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/nested_to_padded_tensor_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/batch_norm_elemt_ops.h:
@@ -18716,8 +18692,6 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/clamp_min.h:
 
-/home/kazeshini/Ctorch/libtorch/include/ATen/ops/coalesce.h:
-
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/broadcast_tensors_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/to_padded_tensor_ops.h:
@@ -18747,6 +18721,12 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/c10/util/OptionalArrayRef.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/contiguous.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/avx512dqintrin.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_fused_moving_avg_obs_fq_helper_ops.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/conv1d_ops.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_autocast_to_reduced_precision_native.h:
 
@@ -19378,6 +19358,10 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/heaviside.h:
 
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/conv1d.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/histogramdd.h:
+
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/_cast_Half_native.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/miopen_convolution_transpose_ops.h:
@@ -19463,6 +19447,10 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /usr/include/c++/11/bits/postypes.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/kl_div_ops.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_sparse_bsr_tensor_unsafe.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/l1_loss.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/histc_ops.h:
 
@@ -19637,3 +19625,15 @@ CMakeFiles/torch_test.dir/nn_main.cpp.o: ../nn_main.cpp \
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/log2.h:
 
 /home/kazeshini/Ctorch/libtorch/include/ATen/ops/log_sigmoid_forward_ops.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/log_softmax.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/max_pool1d_native.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/fake_quantize_per_channel_affine_cachemask.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/_foreach_sub_ops.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/logaddexp.h:
+
+/home/kazeshini/Ctorch/libtorch/include/ATen/ops/logical_not.h:
